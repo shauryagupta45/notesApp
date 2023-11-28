@@ -20,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double buttonHeight = 56.0;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Notes App"),
@@ -28,23 +30,32 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          dbHelper!
-              .insert(NotesModel(
-            id: 1,
-            title: 'First Note',
-            age: 22,
-            description: 'Shaurya',
-            email: 'abc@gmail.com',
-          ))
-              .then((value) {
-            print('Data Store');
-          }).onError((error, stackTrace) {
-            print(error.toString());
-          });
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Positioned(
+            left: screenWidth * 0.48,
+            bottom: 50.0, // Adjust the value for desired spacing
+            child: FloatingActionButton(
+              onPressed: () {
+                dbHelper!
+                    .insert(NotesModel(
+                  id: 1,
+                  title: 'First Note',
+                  age: 22,
+                  description: 'Shaurya',
+                  email: 'abc@gmail.com',
+                ))
+                    .then((value) {
+                  print('Data Stored');
+                }).onError((error, stackTrace) {
+                  print(error.toString());
+                });
+              },
+              child: const Icon(Icons.add),
+            ),
+          ),
+        ],
       ),
     );
   }
