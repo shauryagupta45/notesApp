@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   id: 1,
                   title: 'First Note',
                   age: 22,
-                  description: 'Shaurya',
+                  description: 'Shaurya Notes',
                   email: 'abc@gmail.com',
                 ))
                     .then((value) {
